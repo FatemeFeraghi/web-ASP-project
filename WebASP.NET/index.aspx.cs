@@ -13,6 +13,9 @@ namespace WebASP.NET
         {
             panelOrder.Visible = panPricing.Visible = false;
 
+            //Add option to select pizza at position 0
+            //Now vegeterian is on that location
+
             //If the page is not being loaded for the first time
             if (!Page.IsPostBack)
             {
@@ -70,12 +73,15 @@ namespace WebASP.NET
                 toppings += (item.Selected) ? Convert.ToDecimal(item.Value) : 0;
             }
 
-            subTotal = basePrice + delivery + toppings;
-            tax = subTotal * Convert.ToDecimal(0.5);
-            total = tax + subTotal;
+            litPricing.Text += "Topping Price: $" + toppings + "</br>";
 
+            subTotal = basePrice + delivery + toppings;
             litPricing.Text += "Sub Total Price: $" + subTotal + "</br>";
+
+            tax = Math.Round(subTotal * Convert.ToDecimal(0.15),2);
             litPricing.Text += "Tax: $" + tax + "</br>";
+
+            total = Math.Round(tax + subTotal,2);
             litPricing.Text += "Total Price: $" + total + "</br>";
 
         }
@@ -83,7 +89,20 @@ namespace WebASP.NET
 
         protected void btnOrder_Click(object sender, EventArgs e)
         {
+            panelOrder.Visible = true;
 
+            litOrder.Text = "Sir/Miss " + txtCustomer.Text +
+                ", </br>Your order for a " +
+                lstPizzaSize.SelectedItem.Text +
+                "</br>" + cboPizza.SelectedItem.Text +
+                "Pizza</br> with toppings of: <ul> ";
+
+            foreach (ListItem item in chklstToppings.Items)
+            {
+                litOrder.Text += item.Selected ? "<li>" + item.Text + "</li>" : "";
+            }
+
+            litOrder.Text += "</ul> </br> On a " + radlstCrust.SelectedItem.Text + "crust </br>";
         }
 
         protected void cboPizza_SelectedIndexChanged(object sender, EventArgs e)
@@ -93,10 +112,11 @@ namespace WebASP.NET
 
         protected void chkDelivery_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkDelivery.Checked)
-            {
-                txtAddress.Visible = lblAddress.Visible = true;
-            }
+
+            txtAddress.Visible = lblAddress.Visible = chkDelivery.Checked;
+
+
+           // txtAddress.Visible = lblAddress.Visible = chkDelivery.Checked ? true : false;
 
         }
     }

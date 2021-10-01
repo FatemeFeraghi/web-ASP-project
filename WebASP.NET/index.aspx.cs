@@ -13,6 +13,7 @@ namespace WebASP.NET
         {
             panelOrder.Visible = panPricing.Visible = false;
 
+
             //Add option to select pizza at position 0
             //Now vegeterian is on that location
 
@@ -20,6 +21,8 @@ namespace WebASP.NET
             if (!Page.IsPostBack)
             {
                 txtAddress.Visible = lblAddress.Visible = false;
+
+                //cboPizza.Items.Insert(0, "--Select a Pizza--");
                 cboPizza.Items.Add(new ListItem("Vegeterian", "10"));
                 cboPizza.Items.Add(new ListItem("Hawaiian", "12"));
                 cboPizza.Items.Add(new ListItem("All Dressed", "8"));
@@ -46,7 +49,7 @@ namespace WebASP.NET
             if (cboPizza.SelectedIndex > 0)
             {
                 calculatePrice();
-                panelOrder.Visible = panPricing.Visible = true;
+                panPricing.Visible = true;
             }
         }
 
@@ -95,14 +98,15 @@ namespace WebASP.NET
                 ", </br>Your order for a " +
                 lstPizzaSize.SelectedItem.Text +
                 "</br>" + cboPizza.SelectedItem.Text +
-                "Pizza</br> with toppings of: <ul> ";
+                "Pizza</br> With toppings of: <ul> ";
 
             foreach (ListItem item in chklstToppings.Items)
             {
                 litOrder.Text += item.Selected ? "<li>" + item.Text + "</li>" : "";
             }
 
-            litOrder.Text += "</ul> </br> On a " + radlstCrust.SelectedItem.Text + "crust </br>";
+            litOrder.Text += "</ul> On a " + radlstCrust.SelectedItem.Text + " crust </br>";
+            litOrder.Text += chkDelivery.Checked ? "Will be delivered at </br>" + txtAddress.Text : "The Pizza will be picked up.";
         }
 
         protected void cboPizza_SelectedIndexChanged(object sender, EventArgs e)
@@ -114,8 +118,6 @@ namespace WebASP.NET
         {
 
             txtAddress.Visible = lblAddress.Visible = chkDelivery.Checked;
-
-
            // txtAddress.Visible = lblAddress.Visible = chkDelivery.Checked ? true : false;
 
         }

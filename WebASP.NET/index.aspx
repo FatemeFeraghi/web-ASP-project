@@ -46,7 +46,8 @@
 
         .auto-style9 {
             width: 580px;
-            height: 730px;
+            height: 740px;
+            margin: auto;
         }
 
         .auto-style10 {
@@ -73,7 +74,6 @@
             margin-top: 0px;
             border-radius: 30px;
         }
-
     </style>
 </head>
 <body style="background-color: antiquewhite">
@@ -142,7 +142,9 @@
                                 </td>
 
                                 <td class="auto-style6">
-                                    <asp:DropDownList ID="cboPizza" CssClass="radius-box" runat="server" OnSelectedIndexChanged="cboPizza_SelectedIndexChanged" Width="200px"  AutoPostBack="true"></asp:DropDownList>
+                                    <asp:DropDownList ID="cboPizza" CssClass="radius-box" runat="server" OnSelectedIndexChanged="cboPizza_SelectedIndexChanged" Width="200px" AutoPostBack="true">
+                                        <asp:ListItem> Select a Pizza</asp:ListItem>
+                                    </asp:DropDownList>
                                 </td>
                             </tr>
 
@@ -176,14 +178,16 @@
                                 </td>
                             </tr>
                         </table>
-                        <br /><br /><br />
+                        <br />
+                        <br />
+                        <br />
                     </asp:Panel>
                 </td>
 
 
 
                 <td class="auto-style12">
-<%--Literal is used to show text, render all the data from the server and passes the content directly to the client browser and it doesn't need to go to the server all the time and the data will be saved on the client browser--%>
+                    <%--Literal is used to show text, render all the data from the server and passes the content directly to the client browser and it doesn't need to go to the server all the time and the data will be saved on the client browser--%>
                     <asp:Panel ID="panPricing" runat="server" GroupingText="Pricing" Height="250px" Width="250px" BackColor="#cc6600" CssClass="auto-style8">
                         <asp:Image ID="imgHurtz" ImageUrl="~/image.png" Width="90px" Height="80px" CssClass="auto-style5" runat="server" />
                         <asp:Literal ID="litPricing" runat="server"></asp:Literal>

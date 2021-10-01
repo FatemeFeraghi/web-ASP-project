@@ -69,6 +69,7 @@
   <ItemGroup>
     <Content Include="index.aspx" />
     <Content Include="Web.config" />
+    <Content Include="WebDataBinding.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="index.aspx.cs">
@@ -79,6 +80,13 @@
       <DependentUpon>index.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebDataBinding.aspx.cs">
+      <DependentUpon>WebDataBinding.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebDataBinding.aspx.designer.cs">
+      <DependentUpon>WebDataBinding.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

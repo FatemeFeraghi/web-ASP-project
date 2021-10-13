@@ -19,6 +19,15 @@ namespace WebASP.NET
             if (!Page.IsPostBack)
             {
                 lstCourses.DataTextField = "Number";
+                lstCourses.DataSource = myTable;
+                lstCourses.DataBind();
+
+                cboTeacher.DataTextField = "Teacher";
+                cboTeacher.DataSource = myTable;
+                cboTeacher.DataBind();
+
+                gridViewResults.DataSource = myTable;
+                gridViewResults.DataBind();
             }
         }
 
@@ -93,6 +102,16 @@ namespace WebASP.NET
             DataTable tb = myTable.Clone();
 
             //Show the data on GridView
+            foreach (DataRow item in myTable.Rows)
+            {
+                if (item["Teacher"].ToString() == cboTeacher.SelectedItem.Text)
+                {
+                    tb.ImportRow(item);
+                }
+            }
+
+            gridViewResults.DataSource = tb;
+            gridViewResults.DataBind();
 
         }
 
